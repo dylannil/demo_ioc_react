@@ -1,0 +1,26 @@
+import React, { lazy, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import Loader from './components/loader/Loader';
+import './i18next';
+
+import './pages/Home/route';
+import './pages/NotFound/route';
+import './pages/TestPage/route';
+
+const root = document.getElementById('root');
+
+const App = lazy(() => import(/* webpackChunkName: "app-context" */ './App'));
+
+if (root) {
+  const app = createRoot(root);
+
+  app.render(
+    <Router>
+      <Suspense fallback={<Loader />}>
+        <App />
+      </Suspense>
+    </Router>
+  );
+}
